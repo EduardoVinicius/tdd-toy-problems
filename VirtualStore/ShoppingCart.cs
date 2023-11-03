@@ -1,17 +1,34 @@
-﻿namespace TDD
+﻿using VirtualStore;
+
+namespace TDD
 {
     public class ShoppingCart
     {
-        public List<Product> Products { get; set; }
+        public IList<Item> Items { get; set; }
 
         public ShoppingCart()
         {
-            Products = new List<Product>();
+            Items = new List<Item>();
         }
 
-        public void Add(Product product)
+        public void Add(Item item)
         {
-            Products.Add(product);
+            Items.Add(item);
+        }
+
+        public double FindBiggestValue()
+        {
+            if (Items.Count == 0)
+                return 0;
+
+            double biggest = Items[0].TotalAmount;
+            foreach (var item in Items)
+            {
+                if (biggest < item.TotalAmount)
+                    biggest = item.TotalAmount;
+            }
+
+            return biggest;
         }
     }
 }
