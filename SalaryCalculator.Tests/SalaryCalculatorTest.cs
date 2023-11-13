@@ -29,11 +29,44 @@ namespace SalaryCalculator.Tests
         public void ShouldCalculateDBASalaryWithSalaryLowerThanTheLimit()
         {
             SalaryCalculator calculator = new SalaryCalculator();
-            Employee dba = new Employee("Eduardo", 500.0, Role.DBA);
+            Employee dba = new Employee("Eduardo", 1500.0, Role.DBA);
 
             double salary = calculator.CalculateSalary(dba);
 
-            Assert.That(salary, Is.EqualTo(500.0 * 0.85).Within(0.00001));
+            Assert.That(salary, Is.EqualTo(1500.0 * 0.85).Within(0.00001));
+        }
+
+        [Test]
+        public void ShouldCalculateDBASalaryWithSalaryAboveTheLimit()
+        {
+            SalaryCalculator calculator = new SalaryCalculator();
+            Employee dba = new Employee("Eduardo", 4500.0, Role.DBA);
+
+            double salary = calculator.CalculateSalary(dba);
+
+            Assert.That(salary, Is.EqualTo(4500.0 * 0.75).Within(0.00001));
+        }
+
+        [Test]
+        public void ShouldCalculateTesterSalaryWithSalaryLowerThanTheLimit()
+        {
+            SalaryCalculator calculator = new SalaryCalculator();
+            Employee tester = new Employee("Eduardo", 1500.0, Role.TESTER);
+
+            double salary = calculator.CalculateSalary(tester);
+
+            Assert.That(salary, Is.EqualTo(1500.0 * 0.85).Within(0.00001));
+        }
+
+        [Test]
+        public void ShouldCalculateTesterSalaryWithSalaryAboveTheLimit()
+        {
+            SalaryCalculator calculator = new SalaryCalculator();
+            Employee tester = new Employee("Eduardo", 4500.0, Role.TESTER);
+
+            double salary = calculator.CalculateSalary(tester);
+
+            Assert.That(salary, Is.EqualTo(4500.0 * 0.75).Within(0.00001));
         }
     }
 }
